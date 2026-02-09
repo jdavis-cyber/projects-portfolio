@@ -1,4 +1,4 @@
-# Complete Agent Roster - 13 Specialized Agents
+# Complete Agent Roster - 14 Specialized Agents
 
 ## Business Analysis Team (2 agents)
 
@@ -95,19 +95,36 @@
 ## Project Management (1 agent)
 
 ### Scrum Master
-**Specialty**: Team coordination, task management, blocker resolution  
-**SOUL File**: `.agent/souls/scrum-master.md`  
-**Key Skills**: Task boards, sprint planning, coordination, retrospectives  
+**Specialty**: Team coordination, task management, blocker resolution
+**SOUL File**: `.agent/souls/scrum-master.md`
+**Key Skills**: Task boards, sprint planning, coordination, retrospectives
 **When to Use**: Throughout entire project, coordinating all other agents
+
+---
+
+## Governance & Program Management (1 agent)
+
+### Program Analyst
+**Specialty**: AI governance lifecycle management, CPMAI phase enforcement, synthesized compliance artifact generation
+**SOUL File**: `.agent/souls/program-analyst.md`
+**Directive**: `directives/ai-governance-framework.md`
+**Key Skills**: CPMAI lifecycle orchestration, phase gate reviews, ISO 42001/NIST AI RMF/NIST SP 800-53/CSRMC crosswalk compliance, AI Risk Register management, Statement of Applicability maintenance, evidence repository management, governance cadence preparation, certification readiness assessment, Mission Risk Profiling, Continuous Compliance Validation, Automated Evidence Package generation
+**When to Use**: Throughout entire AI project lifecycle — structures project around CPMAI phases, enforces hard phase gates, generates synthesized compliance artifacts from other agents' outputs, maintains audit-ready evidence chain, prepares governance briefings for Director
+**Authority**: Owns PgM/GL governance responsibilities from RACI matrix. Monitors all agents' compliance obligations. Subordinate to Human Director. Does not override Scrum Master's operational coordination.
+**Framework**: Enterprise AI Governance & Lifecycle Management Framework v1.1.1
 
 ---
 
 ## Typical Workflow Sequence
 
+### Phase 0: Governance Initialization
+0. **Program Analyst** - Establish CPMAI phase structure, initialize governance artifacts (MRP, SoA, Risk Register), define phase gate schedule
+
 ### Phase 1: Discovery & Planning
 1. **Scrum Master** - Initial planning, create task board
 2. **Requirements BA** - Gather requirements from stakeholders
 3. **User Story BA** - Convert to user stories
+4. **Program Analyst** - Conduct Gate 1 (Business Understanding) review
 
 ### Phase 2: Design
 4. **Architecture SE** - Design system architecture (can run parallel with 5-6)
@@ -126,6 +143,7 @@
 13. **Performance DevOps** - Monitor and optimize (ongoing)
 
 **Scrum Master coordinates throughout all phases**
+**Program Analyst conducts phase gate reviews between each phase and generates governance artifacts continuously**
 
 ---
 
@@ -169,4 +187,9 @@ These agents can work simultaneously without conflicts:
 
 ---
 
-**Your complete AI development team - 13 specialized agents ready to coordinate!**
+**Need governance & compliance?**
+→ Program Analyst (works alongside any phase, enforces phase gates, generates compliance artifacts)
+
+---
+
+**Your complete AI development team - 14 specialized agents ready to coordinate!**

@@ -1,69 +1,113 @@
 # Claude Code Multi-Agent Quick Reference
+## Reusable Template Repository Structure
+
+---
 
 ## Starting Any Agent Session
 
 ```bash
-# 1. Navigate to your project
-cd ~/Projects/your-project
+# 1. Navigate to repo root (the template)
+cd ~/Projects/ai-pm-builder-template
 
-# 2. Start Claude Code
+# 2. Navigate to your project directory
+cd projects/[project-name]
+
+# 3. Start Claude Code
 claude-code
 
-# 3. Initialize the agent role
+# 4. Initialize the agent role
 Read CLAUDE.md and .agent/souls/[AGENT-NAME].md and take on that role.
-Check memory/2026-02-04.md for today's activity and any assignments for you.
+Check projects/[project-name]/memory/$(date +%Y-%m-%d).md for today's activity.
 ```
 
 ---
 
 ## Agent Role Commands
 
-### Scrum Master
+### Scrum Master (Project-Specific)
 ```
-Read CLAUDE.md and .agent/souls/scrum-master.md and take on the Scrum Master role.
-Check the task board at orchestration/tasks.md and today's memory.
+Read CLAUDE.md (template) and .agent/souls/scrum-master.md
+Take on the Scrum Master role for the [PROJECT-NAME] project.
+Check projects/[project-name]/orchestration/tasks.md and today's memory.
 Help me coordinate the team's work.
 ```
 
-### Requirements BA
+### Requirements BA (Project-Specific)
 ```
-Read CLAUDE.md and .agent/souls/requirements-ba.md and take on the Requirements BA role.
+Read CLAUDE.md (template) and .agent/souls/requirements-ba.md
+Take on the Requirements BA role for the [PROJECT-NAME] project.
 I need to gather requirements for [FEATURE]. Start by asking me questions to understand what we're building.
 ```
 
-### Database Engineer
+### Database Engineer (Project-Specific)
 ```
-Read CLAUDE.md and .agent/souls/database-engineer.md and take on the Database Engineer role.
-Check the architecture design and create the database schema for [FEATURE].
-```
-
-### QA Engineer
-```
-Read CLAUDE.md and .agent/souls/qa-engineer.md and take on the QA Engineer role.
-Check what's ready for testing and create a test plan for [FEATURE].
+Read CLAUDE.md (template) and .agent/souls/database-engineer.md
+Take on the Database Engineer role for the [PROJECT-NAME] project.
+Check projects/[project-name]/execution/database/ for architecture design.
+Create the database schema for [FEATURE].
 ```
 
-### Backend Developer
+### QA Engineer (Project-Specific)
 ```
-Read CLAUDE.md and .agent/souls/backend-developer.md and take on the Backend Developer role.
-Check the database schema and implement the API endpoints for [FEATURE].
+Read CLAUDE.md (template) and .agent/souls/qa-engineer.md
+Take on the QA Engineer role for the [PROJECT-NAME] project.
+Check projects/[project-name]/orchestration/tasks.md for what's ready for testing.
+Create a test plan for [FEATURE].
+```
+
+### Backend Developer (Project-Specific)
+```
+Read CLAUDE.md (template) and .agent/souls/backend-developer.md
+Take on the Backend Developer role for the [PROJECT-NAME] project.
+Check projects/[project-name]/execution/database/ for schema.
+Implement the API endpoints for [FEATURE].
 ```
 
 ---
 
 ## Essential File Locations
 
+### Template (Shared at Repo Root)
 | What | Where |
 |------|-------|
-| Shared context all agents read | `CLAUDE.md` |
+| Shared agent context | `CLAUDE.md` (or `GEMINI.md` for Google) |
 | Agent identity files | `.agent/souls/[agent-name].md` |
-| Today's coordination log | `memory/$(date +%Y-%m-%d).md` |
-| Long-term team knowledge | `memory/MEMORY.md` |
-| Task board | `orchestration/tasks.md` |
-| Requirements | `directives/requirements/` |
-| Database work | `execution/database/` |
-| Backend code | `execution/backend/` |
-| Frontend code | `execution/frontend/` |
+| Self-annealing protocol | `directives/self-annealing-protocol.md` |
+| Human reporting protocol | `directives/human-reporting-protocol.md` |
+| Project creation script | `./new-project.sh` |
+| Portfolio of all projects | `PORTFOLIO.md` |
+
+### Project-Specific (projects/[project-name]/)
+| What | Where |
+|------|-------|
+| Project overview | `projects/[project-name]/PROJECT.md` |
+| Today's coordination log | `projects/[project-name]/memory/$(date +%Y-%m-%d).md` |
+| Long-term project knowledge | `projects/[project-name]/memory/MEMORY.md` |
+| Task board | `projects/[project-name]/orchestration/tasks.md` |
+| Governance docs | `projects/[project-name]/governance/` |
+| Database work | `projects/[project-name]/execution/database/` |
+| Backend code | `projects/[project-name]/execution/backend/` |
+| Frontend code | `projects/[project-name]/execution/frontend/` |
+
+---
+
+## Creating a New Project
+
+```bash
+# From repo root, scaffold a new project
+./new-project.sh my-project-name
+
+# This creates:
+# projects/my-project-name/
+#   ├── PROJECT.md
+#   ├── memory/
+#   ├── orchestration/
+#   ├── governance/
+#   └── execution/
+#       ├── database/
+#       ├── backend/
+#       └── frontend/
+```
 
 ---
 
@@ -73,19 +117,23 @@ Check the database schema and implement the API endpoints for [FEATURE].
 
 **Session 1: Requirements BA**
 ```bash
+cd projects/my-project
 claude-code
 ```
 ```
-Take on Requirements BA role. Gather requirements for the dashboard feature.
+Take on Requirements BA role for my-project.
+Gather requirements for the dashboard feature.
 ```
-*Agent creates requirements docs and writes handoff in memory file*
+*Agent creates requirements docs in projects/my-project/governance/ and writes handoff in projects/my-project/memory/$(date +%Y-%m-%d).md*
 
-**Session 2: User Story BA**  
+**Session 2: User Story BA**
 ```bash
+cd projects/my-project
 claude-code
 ```
 ```
-Take on User Story BA role. Check memory/2026-02-04.md for the handoff from Requirements BA.
+Take on User Story BA role for my-project.
+Check projects/my-project/memory/$(date +%Y-%m-%d).md for the handoff from Requirements BA.
 Convert those requirements into user stories.
 ```
 
@@ -93,23 +141,25 @@ Convert those requirements into user stories.
 
 **Terminal 1: Database Engineer**
 ```bash
-cd ~/Projects/your-project
+cd projects/my-project
 claude-code
 ```
 ```
-Take on Database Engineer role. Design schema for [feature].
+Take on Database Engineer role for my-project.
+Design schema for [feature].
 ```
 
 **Terminal 2: UI/UX Designer** (at the same time)
 ```bash
-cd ~/Projects/your-project
+cd projects/my-project
 claude-code
 ```
 ```
-Take on UI/UX Designer role. Create wireframes for [feature].
+Take on UI/UX Designer role for my-project.
+Create wireframes for [feature].
 ```
 
-Both work independently, coordinate through memory files.
+Both work independently, coordinate through projects/my-project/memory/ files.
 
 ---
 
@@ -118,29 +168,31 @@ Both work independently, coordinate through memory files.
 Always end with:
 ```
 Before we finish:
-1. Write a complete handoff summary in memory/2026-02-04.md
-2. List all files you created with their paths
-3. Note any blockers or decisions needed
-4. Update the task board if needed
+1. Run the Verify phase — self-review your output against acceptance criteria
+2. Write a complete handoff summary in projects/[project-name]/memory/$(date +%Y-%m-%d).md
+   (include self-review summary)
+3. List all files you created with their paths
+4. Note any corrections made (annealing records) or blockers discovered
+5. Update projects/[project-name]/orchestration/tasks.md if needed
 ```
 
 ---
 
 ## Checking Status
 
-### See today's activity
+### See today's activity for a project
 ```bash
-cat memory/$(date +%Y-%m-%d).md
+cat projects/[project-name]/memory/$(date +%Y-%m-%d).md
 ```
 
-### See current tasks
+### See current tasks for a project
 ```bash
-cat orchestration/tasks.md
+cat projects/[project-name]/orchestration/tasks.md
 ```
 
-### See what files were created recently
+### See what files were created recently in a project
 ```bash
-find . -type f -mtime -1 -not -path '*/\.*'
+find projects/[project-name] -type f -mtime -1 -not -path '*/\.*'
 ```
 
 ---
@@ -180,15 +232,35 @@ tmux attach -t myproject  (reattach)
 
 ### After each agent session
 ```bash
+# Include project name in commit message
 git add .
-git commit -m "Session: [AGENT] - [what was accomplished]"
+git commit -m "Session: [PROJECT] [AGENT] - [what was accomplished]"
 ```
 
 ### Examples
 ```bash
-git commit -m "Session: Requirements BA - Completed stakeholder interviews"
-git commit -m "Session: Database Engineer - Created schema v1"
-git commit -m "Session: QA Engineer - Added test plan for notifications"
+git commit -m "Session: dashboard-app Requirements BA - Completed stakeholder interviews"
+git commit -m "Session: dashboard-app Database Engineer - Created schema v1"
+git commit -m "Session: analytics-service QA Engineer - Added test plan for notifications"
+```
+
+---
+
+## Portfolio Management
+
+### Update portfolio after creating new project
+```bash
+# Add your new project to PORTFOLIO.md at repo root
+# Include: project name, status, team members, key dates
+
+# Then commit
+git add PORTFOLIO.md
+git commit -m "Portfolio: Add [project-name] to active projects"
+```
+
+### View all projects
+```bash
+cat PORTFOLIO.md
 ```
 
 ---
@@ -241,26 +313,45 @@ find . -type f -mtime 0 -ls
 ## Pro Tips
 
 ✓ Always read memory file before starting work
-✓ Always write handoffs before ending sessions  
+✓ Run the Validate phase before starting execution
+✓ Run the Verify phase before handing off work
+✓ Include self-review summary in every handoff
+✓ Always write handoffs before ending sessions
 ✓ Use descriptive file names
 ✓ Commit after each agent session
 ✓ Keep task board current
 ✓ Name terminals/tabs by agent role
 ✓ Don't let agents work in wrong directories
+✓ Don't pass flawed work forward — fix it or block the handoff
 
 ---
 
-## Quick Setup for New Project
+## Template Structure Overview
 
-```bash
-# Using the setup script
-./setup-claude-project.sh my-new-project
-
-# Or with custom agents
-./setup-claude-project.sh -a scrum-master,requirements-ba,backend-developer my-app
-
-# Or in custom location
-./setup-claude-project.sh -p ~/Code my-app
+```
+ai-pm-builder-template/          (repo root)
+├── CLAUDE.md                     (shared agent context)
+├── GEMINI.md                     (for Google anti-gravity projects)
+├── PORTFOLIO.md                  (all projects overview)
+├── directives/                   (template shared directives)
+│   ├── self-annealing-protocol.md
+│   ├── human-reporting-protocol.md
+│   └── requirements/
+├── .agent/souls/                 (shared agent identities)
+│   ├── scrum-master.md
+│   ├── requirements-ba.md
+│   ├── backend-developer.md
+│   ├── database-engineer.md
+│   └── qa-engineer.md
+└── projects/
+    ├── project-1/
+    │   ├── PROJECT.md
+    │   ├── memory/               (daily logs & MEMORY.md)
+    │   ├── orchestration/        (tasks.md)
+    │   ├── governance/           (requirements, decisions)
+    │   └── execution/            (database/, backend/, frontend/)
+    └── project-2/
+        └── (same structure)
 ```
 
 ---

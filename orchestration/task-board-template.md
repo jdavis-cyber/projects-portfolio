@@ -66,12 +66,13 @@ These items are fully defined and ready for an agent to pick up when they have c
 ### In Review (Awaiting Validation)
 
 #### TASK-004: [Task Name]
-**Assigned To**: [Original Agent Name]  
-**Completed**: [YYYY-MM-DD HH:MM]  
-**Reviewer**: [Agent or Human]  
-**Priority**: [High/Medium/Low]  
-**Review Status**: Awaiting feedback  
-**Artifacts Delivered**: [List of files/docs created]  
+**Assigned To**: [Original Agent Name]
+**Completed**: [YYYY-MM-DD HH:MM]
+**Reviewer**: [Agent or Human]
+**Priority**: [High/Medium/Low]
+**Review Status**: Awaiting feedback
+**Self-Review Summary**: [Agent's self-annealing Verify phase results]
+**Artifacts Delivered**: [List of files/docs created]
 **Location**: [Where to find the deliverables]
 
 ---
@@ -79,11 +80,13 @@ These items are fully defined and ready for an agent to pick up when they have c
 ### Done (Completed This Sprint)
 
 #### TASK-005: [Task Name]
-**Assigned To**: [Agent Name]  
-**Completed**: [YYYY-MM-DD HH:MM]  
-**Cycle Time**: [X hours from start to done]  
-**Acceptance Criteria Met**: Yes  
-**Artifacts**: [List of deliverables]  
+**Assigned To**: [Agent Name]
+**Completed**: [YYYY-MM-DD HH:MM]
+**Cycle Time**: [X hours from start to done]
+**Acceptance Criteria Met**: Yes
+**Self-Annealing**: Verify phase complete, self-review summary in memory file
+**Corrections Applied**: [None / Brief description of any self-corrections made]
+**Artifacts**: [List of deliverables]
 **Retrospective Notes**: [Any learnings or issues encountered]
 
 ---
@@ -133,11 +136,18 @@ This section shows current work distribution to help identify overload or underu
 
 ## Sprint Metrics
 
-**Velocity**: [Points or hours completed per sprint]  
-**Average Cycle Time**: [Hours from start to done]  
-**Blocker Rate**: [Number of blockers per 10 tasks]  
-**WIP Limit Violations**: [Times agents exceeded their WIP limit]  
+**Velocity**: [Points or hours completed per sprint]
+**Average Cycle Time**: [Hours from start to done]
+**Blocker Rate**: [Number of blockers per 10 tasks]
+**WIP Limit Violations**: [Times agents exceeded their WIP limit]
 **Handoff Failures**: [Times work had to be sent back to previous agent]
+
+### Self-Annealing Metrics
+**Self-Catch Rate**: [Errors caught by producing agent vs. found downstream — target > 80%]
+**Correction Cycle Time**: [Average time from error detection to verified fix — target < 2 hours]
+**Recurrence Rate**: [Same error class reappearing after prevention documented — target < 10%]
+**Circuit Breaker Triggers**: [Number of times circuit breaker activated this sprint]
+**Rollback Frequency**: [Number of rollbacks vs. total corrections — target < 5%]
 
 ## Sprint Retrospective (End of Sprint)
 
@@ -154,6 +164,13 @@ This section is filled out at sprint conclusion to capture learnings.
 ### What We'll Try Next Sprint
 - [Experiment 1]
 - [Experiment 2]
+
+### Self-Annealing Review
+- **Most common error class this sprint**: [Defect/Omission/Inconsistency/Degradation]
+- **Agents with highest self-catch rate**: [Agent names]
+- **Errors that escaped to downstream agents**: [Count and description]
+- **Circuit breaker events**: [Description of any systemic issues caught]
+- **Prevention patterns added to MEMORY.md**: [List]
 
 ### Learnings to Add to MEMORY.md
 - [Long-term lesson 1]

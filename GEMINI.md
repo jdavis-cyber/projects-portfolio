@@ -6,10 +6,13 @@ This repository implements a 3-Layer Governance Architecture for GenAI-powered d
 - **Orchestration Layer**: Multi-agent coordination and workflow management
 - **Execution Layer**: Specialized agent implementation and artifacts
 
+The repository is organized as a **Dual-Layer Architecture** with a shared template layer at the repo root and project-specific layers in individual project directories.
+
 ## Active Agent Context
 <!-- Updated dynamically when agent sessions begin -->
 **Current Agent**: [AGENT_NAME]
 **Domain**: [SPECIALIZATION]
+**Project**: [PROJECT_NAME]
 **Session Initiated**: [TIMESTAMP]
 **Reporting To**: Scrum Master + Human Director
 
@@ -46,27 +49,53 @@ The UI/UX Designer creates user-centered designs, wireframes, and ensures the so
 ### Project Coordination
 The Scrum Master coordinates work across all agents, manages the task board, identifies and resolves blockers, and ensures the team maintains velocity toward sprint goals.
 
+### Governance and Program Management
+The Program Analyst operationalizes the Enterprise AI Governance & Lifecycle Management Framework across the team. This agent structures every project around the CPMAI six-phase lifecycle, conducts hard phase gate reviews, generates synthesized compliance artifacts that satisfy ISO 42001, NIST AI RMF, NIST SP 800-53, and DoD CSRMC requirements simultaneously, and maintains the evidence repository for audit and certification readiness. The Program Analyst functions as both the AI Governance Lead and Program Manager governance functions from the framework's RACI matrix, while monitoring all other agents' compliance obligations. The Program Analyst is subordinate to the Human Director in all matters and does not interfere with the Scrum Master's operational coordination. The governance framework reference is maintained at `directives/ai-governance-framework.md`.
+
+## Repository Structure: Template vs Project Layers
+
+The repository operates as a dual-layer system. The **template layer** at the repo root contains reusable components shared across all projects: the directives folder (AI governance framework, branding guide, self-annealing protocol), the .agent folder with shared SOUL files defining agent identities, orchestration templates, and memory templates. This layer provides the strategic framework and agent definitions that all projects inherit. The **project layer** lives in `projects/[project-name]/` directories and contains project-specific artifacts: execution outputs, project governance evidence, project memory files, project task boards, and a PROJECT.md identity card describing that specific project's scope and objectives.
+
+New projects are scaffolded using the `./new-project.sh <project-name>` script, which copies the template structure from `projects/.project-template/` to create `projects/[project-name]/` with all necessary directories. The root-level `memory/` and `orchestration/` directories continue to exist as cross-project learnings and templates that can be referenced by any project.
+
 ## Coordination Mechanisms
 
 ### Inter-Agent Handoffs
-When your work creates artifacts that another agent needs, you follow a structured handoff protocol. First, you complete your assigned work to the quality standards defined in this document. Second, you write a handoff summary to the daily memory file that explains what you completed, what decisions you made, and what the next agent needs to know. Third, you update the orchestration task board to mark your work complete and signal the next agent. Fourth, you place all artifacts in the correct directories where downstream agents can find them.
+When your work creates artifacts that another agent needs, you follow a structured handoff protocol. First, you complete your assigned work to the quality standards defined in this document. Second, you write a handoff summary to the daily memory file in your project's memory directory that explains what you completed, what decisions you made, and what the next agent needs to know. Third, you update your project's task board to mark your work complete and signal the next agent. Fourth, you place all artifacts in the correct project-scoped directories where downstream agents can find them.
 
 ### Memory Architecture
-The system maintains both short-term and long-term memory. Daily memory files capture what happened each day and serve as handoff mechanisms between agents. The MEMORY.md file stores persistent knowledge, important decisions, user preferences, and lessons learned that should influence all future work. When you learn something that will matter beyond today, you add it to MEMORY.md.
+The system maintains both short-term and long-term memory across project and template layers. Daily memory files in `projects/[project-name]/memory/` capture what happened each day on that specific project and serve as handoff mechanisms between agents. The `projects/[project-name]/memory/MEMORY.md` file stores that project's persistent knowledge, decisions, preferences, and lessons learned. The root-level `memory/MEMORY.md` stores cross-project learnings and patterns that apply to all projects. When you learn something that will matter only to your current project, add it to `projects/[project-name]/memory/MEMORY.md`. When you discover something that should influence how all projects work, add it to the root `memory/MEMORY.md`.
 
 ### Directory Structure
-Projects follow a standardized layout. The .agent directory contains agent-specific configurations including SOUL files that define each agent's identity and protocols for coordination. The directives directory holds strategic constraints that no agent should violate. The orchestration directory contains the task board, dependency graphs, and workflow definitions. The execution directory is where implementation artifacts live. The memory directory stores both daily logs and long-term memory. This GEMINI.md file provides shared context that all agents read on initialization.
+
+**Template Layer (Repo Root)**:
+- `directives/` — Strategic constraints shared across all projects: AI governance framework, branding guide, self-annealing protocol, and phase gate requirements
+- `.agent/souls/` — SOUL files defining agent identities and coordination protocols, used by all agents across all projects
+- `orchestration/` — Cross-project templates and workflow definitions
+- `memory/` — Cross-project learnings and patterns applicable to multiple projects
+- `GEMINI.md` — This file, providing shared coordination context for all agents
+- `CLAUDE.md` — Complementary context document for Claude agents
+- `new-project.sh` — Script to scaffold new projects from the template
+
+**Project Layer** (`projects/[project-name]/`):
+- `execution/` — Implementation artifacts and outputs specific to this project
+- `governance/` — Project governance evidence and compliance artifacts
+- `memory/` — Project-specific daily logs and long-term memory
+- `orchestration/tasks.md` — Project task board, dependency graphs, and workflow definitions
+- `PROJECT.md` — Identity card describing this project's scope, objectives, and context
+
+Each project inherits the shared directives and agent SOUL definitions from the template layer but maintains its own execution, memory, task board, and governance evidence. This GEMINI.md file provides shared context that all agents read on initialization, regardless of which project they're working on.
 
 ## Operating Modes
 
 ### Independent Execution
-When you're assigned a self-contained task with no dependencies, you work in independent execution mode. You check your assignment in today's memory file, execute the work within your specialization, document what you did and why, and write your results back to memory for visibility.
+When you're assigned a self-contained task with no dependencies, you work in independent execution mode. You check your assignment in today's memory file for your project (in `projects/[project-name]/memory/`), execute the work within your specialization, document what you did and why, and write your results back to the project memory for visibility.
 
 ### Sequential Workflow
-When your task is part of a sequential chain, you operate in sequential workflow mode. You first verify that upstream dependencies have completed their work. You read the handoff documentation from the previous agent to understand context and decisions. You execute your portion of the workflow. You document your output in a way that the next agent can immediately use. You explicitly mark dependencies as satisfied when you complete your work.
+When your task is part of a sequential chain, you operate in sequential workflow mode. You first verify that upstream dependencies have completed their work by checking the project task board in `projects/[project-name]/orchestration/tasks.md`. You read the handoff documentation from the previous agent in the project memory to understand context and decisions. You execute your portion of the workflow. You document your output in a way that the next agent can immediately use. You explicitly mark dependencies as satisfied when you complete your work in the project task board.
 
-### Parallel Execution  
-When multiple agents can work simultaneously on independent tasks, you coordinate through the shared memory layer to avoid conflicts. You work in your designated directories to prevent file collisions. You check the task board frequently to see if any parallel work has implications for your task. You document your progress continuously so other agents can see what's happening.
+### Parallel Execution
+When multiple agents can work simultaneously on independent tasks, you coordinate through the project's shared memory layer to avoid conflicts. You work in your designated project directories to prevent file collisions. You check the project task board in `projects/[project-name]/orchestration/tasks.md` frequently to see if any parallel work has implications for your task. You document your progress continuously in project memory so other agents can see what's happening.
 
 ## Quality Expectations
 
@@ -89,19 +118,19 @@ When you communicate through memory files and documentation, write as a professi
 
 ## Session Startup Protocol
 
-Every time you begin a session, you follow a consistent initialization sequence. First, you read this GEMINI.md file completely to refresh your understanding of the team structure and coordination protocols. Second, you read your personal SOUL.md file that defines your identity, values, and specialty. Third, you check today's memory file to find your current assignment. Fourth, you review the task board to understand where your work fits in the overall project context. Fifth, you confirm you understand your task before beginning execution, raising questions if anything is unclear.
+Every time you begin a session, you follow a consistent initialization sequence. First, you read this GEMINI.md file completely to refresh your understanding of the team structure and coordination protocols. Second, you identify which project you are working on for this session and read that project's PROJECT.md identity card to understand its specific scope and objectives. Third, you read your personal SOUL.md file from `.agent/souls/` that defines your identity, values, and specialty. Fourth, you check today's memory file in `projects/[project-name]/memory/` to find your current assignment. Fifth, you review the task board in `projects/[project-name]/orchestration/tasks.md` to understand where your work fits in the project's context. Sixth, you review relevant directives from the `directives/` folder, particularly the AI governance framework, to ensure you understand project governance requirements. Seventh, you confirm you understand your task before beginning execution, raising questions if anything is unclear.
 
 ## Adaptive Learning
 
-As you work, you encounter patterns, make decisions, and learn lessons that should benefit future work. When you identify something that should be remembered long-term, you add it to the MEMORY.md file under the relevant section. If the learning affects how multiple agents should work, you update this GEMINI.md file. If the learning is specific to your role, you update your SOUL.md file. This creates a system that gets smarter over time as the agent team compounds knowledge.
+As you work, you encounter patterns, make decisions, and learn lessons that should benefit future work. When you identify something that should be remembered long-term, you add it to `projects/[project-name]/memory/MEMORY.md` if it's specific to your current project. If the learning affects how projects should work across the repository, you add it to the root `memory/MEMORY.md` for cross-project reference. If the learning affects how multiple agents should work at a coordination level, you update this GEMINI.md file. If the learning is specific to your role and identity, you update your SOUL.md file. This creates a system that gets smarter over time as the agent team compounds knowledge both within projects and across the organization.
 
 ## Escalation Path
 
-When you encounter blockers or uncertainty that prevents progress, you follow a clear escalation path. First, you document the blocker clearly in today's memory file with enough context for others to understand the issue. Second, you update your task status to "Blocked" in the orchestration task board. Third, you tag the Scrum Master agent for assistance in resolving the blocker. Fourth, while waiting for resolution, you continue with any unblocked work to maintain productivity.
+When you encounter blockers or uncertainty that prevents progress, you follow a clear escalation path. First, you document the blocker clearly in today's memory file in `projects/[project-name]/memory/` with enough context for others to understand the issue. Second, you update your task status to "Blocked" in `projects/[project-name]/orchestration/tasks.md`. Third, you tag the Scrum Master agent for assistance in resolving the blocker. Fourth, while waiting for resolution, you continue with any unblocked work to maintain productivity.
 
 ---
 
-**Template Version**: 1.0
-**Last Updated**: 2026-02-04  
+**Template Version**: 2.0
+**Last Updated**: 2026-02-09
 **Maintained By**: All agents contribute improvements
 **Review Cadence**: Continuous improvement as patterns emerge
