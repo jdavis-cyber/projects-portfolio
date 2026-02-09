@@ -1,6 +1,7 @@
 # AI PM Builder's Template
 
 **Enterprise AI Governance & Lifecycle Management Framework**
+
 **Author**: Jerome Davis — Executive Architect | AI Governance & Strategy
 
 ---
