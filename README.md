@@ -6,7 +6,7 @@
 
 ---
 
-A governance-first, multi-agent development framework for building AI applications using agentic coding platforms (Claude Code, Google Anti-Gravity). This repo serves as both the **reusable template** and a **portfolio of projects** built with it.
+A governance-first, multi-agent development framework for building AI applications using agentic coding platforms (Claude Code, Google Antigravity). This repo serves as both the **reusable template** and a **portfolio of projects** built with it.
 
 ## What This Is
 
