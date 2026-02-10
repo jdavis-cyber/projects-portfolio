@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# IDE
+.vscode/
+.idea/
+
+# Dev notes (internal build journal, not for GitHub)
+dev-notes/
+
+# Misc
+*.log
+Thumbs.db
