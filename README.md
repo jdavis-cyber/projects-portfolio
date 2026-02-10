@@ -1,6 +1,6 @@
 # AI Governance & Team Framework (The Factory)
 
-**Executive Architect | AI Governance & Strategy**
+## Executive Architect | AI Governance & Strategy
 
 This repository is the central **AI Development Factory** — containing the team structure, governance directives, and process orchestration for building AI applications. It serves as the "Office" where the 14 specialized AI agents live and work.
 
@@ -25,7 +25,7 @@ This is strictly a **Governance & Orchestration** repository. It contains:
 
 ## 📂 Architecture
 
-```
+```text
 jdavis-cyber-workspace/
 ├── .agent/                    # The Team
 │   ├── AGENT-ROSTER.md        # Roster of all 14 agents
