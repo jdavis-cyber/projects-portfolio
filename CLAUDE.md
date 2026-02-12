@@ -1,30 +1,26 @@
 # Claude Code - Multi-Agent Orchestration Context
 
-## Repository Architecture
+## Project Architecture
 
-This repository operates as a **Governance Factory** for GenAI development:
+This repository is a **Single-Project Workspace** for AI-driven development.
 
-### The Factory (Repo Root)
-
-This repository contains the immutable "Source of Truth" for the AI team:
+### Workspace Structure
 
 - `directives/` — Strategic governance rules (CPMAI, NIST, ISO)
-- `directives/templates/project-scaffold` — The template for new external projects
 - `.agent/souls/` — Agent SOUL files defining specializations
 - `CLAUDE.md` — This file, coordination protocols (shared)
 - `GEMINI.md` — Gemini agent context (shared)
 - `orchestration/` — Cross-project templates and learnings
-- `memory/` — Cross-project patterns and decisions
+- `memory/` — Project patterns and decisions
+- `execution/` — Source code and implementation artifacts
+- `.governance/` — Compliance evidence and artifacts
+- `PROJECT.md` — Project definition and scope
 
-### External Projects
+### 3-Layer Governance Architecture
 
-Specific applications (Products) live in **separate repositories**. They are initialized by copying the `directives/templates/project-scaffold` from this Factory.
-
-### 3-Layer Governance Architecture (Applied to External Projects)
-
-- **Directives Layer**: Strategic rules (Inherited from this Factory)
-- **Orchestration Layer**: Agent coordination (Project-scoped)
-- **Execution Layer**: Implementation (Project-scoped)
+- **Directives Layer**: Strategic rules (`directives/`)
+- **Orchestration Layer**: Agent coordination (`orchestration/`)
+- **Execution Layer**: Implementation (`execution/`)
 
 ## Your Current Role
 <!-- This section is dynamically updated based on which agent is active -->
@@ -130,28 +126,6 @@ When an agent completes work that another agent depends on:
 memory/
   ├── MEMORY.md              # Patterns, standards, and decisions that apply across projects
   └── learnings/             # Shared learnings and best practices
-```
-
-### File Organization
-
-#### Governance Factory (Repo Root)
-
-```text
-./
-  ├── directives/            # Strategic governance rules (Layer 1)
-  │   ├── self-annealing-protocol.md      # Error detection and correction
-  │   ├── human-reporting-protocol.md     # Director reporting and approval gates
-  │   ├── ai-governance-framework.md      # AI governance lifecycle & compliance
-  │   └── ...                             # Other shared governance directives
-  ├── directives/templates/  # Project templates
-  │   └── project-scaffold/  # Core structure for new external projects
-  ├── .agent/
-  │   ├── souls/             # SOUL.md files for each agent specialization
-  │   └── coordination/      # Template handoff protocols
-  ├── orchestration/         # Template task structures and learnings
-  ├── memory/                # Cross-project patterns and decisions
-  ├── CLAUDE.md             # This file - coordination protocols
-  └── GEMINI.md             # Gemini agent context
 ```
 
 ## Work Modes

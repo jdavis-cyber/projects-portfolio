@@ -69,8 +69,6 @@ def find_tasks_file():
     """Locates the tasks.md file."""
     if os.path.exists(TASKS_FILE):
         return TASKS_FILE
-    if os.path.exists(f"directives/templates/project-scaffold/{TASKS_FILE}"):
-        return f"directives/templates/project-scaffold/{TASKS_FILE}"
     return None
 
 

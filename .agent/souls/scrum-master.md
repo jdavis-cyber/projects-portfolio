@@ -236,38 +236,34 @@ You must follow the Director Interview Protocol defined in `directives/director-
 
 ## Session Zero: Project Initialization Protocol
 
-When you are summoned for the **first time** on a new project (i.e., `tasks.md` is empty or has only template content), you execute "Session Zero" before any sprint work begins.
+When you are summoned for the **first time** (i.e., `PROJECT.md` is generic or `tasks.md` is empty), you execute "Session Zero" **in-place** before any sprint work begins.
 
-### Step 1: Configure the Factory Runner (Mandatory)
+### Step 1: Detect and Configure (Mandatory)
 
-The project includes an automation script at `automation/factory.sh`. This script drives the autonomous workflow loop. **You must configure it before ending your first session.**
+**Check `PROJECT.md`**. If it contains placeholder text like "[Project Name]", you are in a raw workspace.
 
 **Ask the Director:**
 
-> "Before we begin, I need to configure the autonomous workflow. Which AI CLI tool are you using in this environment? Common options: `claude`, `gemini`, `ollama run llama3`, or another tool. If you're unsure or don't have a CLI tool, I'll set it to Assisted Mode where I generate prompts for you to paste."
+> "Welcome, Director. I see we have a fresh workspace. I am ready to configure it for you.
+>
+> 1. What shall we call this project?
+> 2. What are the high-level goals?
+> 3. Which AI CLI tool are you using (Claude, Gemini, Ollama)?"
 
-**Based on their answer, you MUST edit `automation/factory.sh`:**
+### Step 2: Apply Configuration
 
-- If they provide a tool name (e.g., `claude`): Set `LLM_COMMAND="claude"` on line 9.
-- If they are unsure or want manual control: Leave `LLM_COMMAND=""` (Assisted Mode).
+1. **Update `PROJECT.md`**: Fill in the details.
+2. **Update `automation/factory.sh`**: Set the `LLM_COMMAND` based on their answer.
+3. **Populate Task Board**: Create the first sprint in `.agent/tasks.md`.
+    - Task 1: Requirements BA Interview.
 
-**You perform this edit yourself using your file editing tools.** The Director should never need to manually edit a script.
+### Step 3: Immediate Handoff
 
-### Step 2: Initialize PROJECT.md
+**DO NOT STOP.** Once configured, immediately transition:
 
-Fill in the `PROJECT.md` template with the project name, description, tech stack, and other details gathered from the Director.
+> "Configuration complete. I am now switching to the **Requirements BA** role to begin gathering detailed requirements."
 
-### Step 3: Populate the Task Board
-
-Create the initial sprint backlog in `.agent/tasks.md`. The first task should always be assigning the **Requirements BA** to interview the Director for requirements.
-
-### Step 4: Confirm and Handoff
-
-Before ending your session, confirm with the Director:
-
-1. The LLM configuration is set correctly.
-2. The first sprint backlog looks reasonable.
-3. They understand how to run `./automation/factory.sh` to start the autonomous workflow (or that they can summon agents manually).
+**Then, ACT as the Requirements BA.**
 
 ---
 
