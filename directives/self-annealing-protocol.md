@@ -61,6 +61,7 @@ Before starting any work, verify your inputs are sound. Do not begin work on top
 4. **Scope clarity** — Do you have clear acceptance criteria for your own task? Can you define what "done" looks like before you start?
 
 **If pre-flight fails:**
+
 - Do NOT proceed with work. Working on a bad foundation wastes effort.
 - Document what's wrong and what's needed in today's memory file.
 - Update the task board with the blocker.
@@ -114,7 +115,7 @@ When verification reveals a problem — or when a downstream agent reports one �
 Can you fix this within your domain?
 
 - **Yes (Self-Correct)**: Fix the error, re-run the Verify phase, document the correction.
-- **No (Escalate)**: The error originates upstream or requires a decision outside your expertise. Escalate with full context.
+- **No (Escalate)**: The error originates upstream or requires a decision outside your expertise. Escalate with full context using the `orchestration/escalation-template.md`.
 
 **Step 3: Apply the Fix**
 
@@ -164,6 +165,7 @@ When an operation fails (API call, test execution, build step, deployment), use 
 When errors cascade across agents or repeated corrections don't resolve the issue, the circuit breaker activates to prevent wasted effort.
 
 **Circuit breaker triggers when:**
+
 - The same error class occurs 3 or more times across different tasks
 - A correction creates a new error (fix-introduces-bug cycle)
 - Two or more agents are blocked by the same root cause
@@ -172,7 +174,7 @@ When errors cascade across agents or repeated corrections don't resolve the issu
 **When the circuit breaker triggers:**
 
 1. **Stop** all affected work immediately.
-2. **Notify** the Scrum Master with a circuit breaker alert in the memory file.
+2. **Notify** the Scrum Master by filling out the `orchestration/circuit-breaker-alert.md` template and saving it to the memory file.
 3. **Gather** all error documentation from affected agents.
 4. **Diagnose** the systemic root cause (not individual symptoms).
 5. **Resolve** the root cause before resuming any affected work.
@@ -196,6 +198,7 @@ must update the OpenAPI spec first. Frontend reads from spec, not from trial-and
 When a correction cannot be made forward (the fix is too complex or risky), roll back to the last known good state.
 
 **Rollback Checklist:**
+
 1. Identify the last verified-good state of the affected artifact.
 2. Confirm the rollback target with the Scrum Master or human director.
 3. Restore the artifact to the verified-good state.
@@ -204,6 +207,7 @@ When a correction cannot be made forward (the fix is too complex or risky), roll
 6. Re-enter the self-annealing loop from Phase 1 with the restored state.
 
 **Rollback applies to:**
+
 - Code changes (git revert to last passing commit)
 - Schema migrations (down migration to previous version)
 - Configuration changes (restore previous config)
@@ -215,66 +219,79 @@ When a correction cannot be made forward (the fix is too complex or risky), roll
 Each agent has domain-specific verification checks in addition to the universal protocol above.
 
 ### Requirements BA
+
 - Verify requirements are testable, unambiguous, and traceable to business objectives
 - Cross-check for conflicting requirements before handoff
 - Validate stakeholder sign-off on captured requirements
 
 ### User Story BA
+
 - Verify every requirement maps to at least one user story
 - Check acceptance criteria are in Given-When-Then format and testable
 - Validate story sizing is within sprint capacity
 
 ### Architecture SE
+
 - Verify technology choices are justified by requirements, not preference
 - Check that all integration points have defined failure handling
 - Validate that ADRs exist for every significant decision
 
 ### Documentation SE
+
 - Verify documentation matches current implementation (not outdated)
 - Test all documented procedures by following them step-by-step
 - Check all referenced file paths and links are valid
 
 ### Database Engineer
+
 - Verify schema constraints prevent invalid data states
 - Test queries against realistic data volumes before handoff
 - Validate migration scripts run successfully in both directions (up and down)
 
 ### Backend Developer
+
 - Verify API responses match the OpenAPI contract
 - Test error handling for all documented failure modes
 - Check that no security vulnerabilities exist (injection, auth bypass, data exposure)
 
 ### Frontend Developer
+
 - Verify UI matches wireframes and design specs
 - Test across specified browsers and screen sizes
 - Validate accessibility compliance (WCAG AA minimum)
 
 ### UI/UX Designer
+
 - Verify designs address all user personas from the requirements
 - Check accessibility (contrast ratios, text sizing, keyboard navigation)
 - Validate interaction patterns are consistent across the design system
 
 ### QA Engineer
+
 - Verify test plans cover all acceptance criteria, not just happy paths
 - Cross-check test results against actual user stories
 - Validate that bug reports are reproducible before filing
 
 ### Automation Test Engineer
+
 - Verify all automated tests are deterministic (no flaky tests)
 - Check test coverage against critical user paths, not just line count
 - Validate test infrastructure integrates with CI/CD pipeline
 
 ### Pipeline DevOps
+
 - Verify deployment pipelines include all required quality gates
 - Test rollback procedures in non-production environments
 - Validate secrets management (no credentials in code or logs)
 
 ### Performance DevOps
+
 - Verify monitoring covers all critical system components
 - Test alerting by simulating failure conditions
 - Validate runbooks by executing them in non-production environments
 
 ### Scrum Master
+
 - Verify task board reflects reality (no phantom tasks, no missing blockers)
 - Check that all blocked agents have documented blockers with resolution owners
 - Validate that handoff quality meets standards before marking tasks complete

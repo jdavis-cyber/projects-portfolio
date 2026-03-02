@@ -5,10 +5,13 @@
 Every agent MUST follow this sequence. Skipping steps or the order of files below is a Process Violation.
 
 1. **PROJECT.md**: Read the current mission and scope.
-2. **CODEX.md**: [THIS FILE] Verify the team structure and your specific mandate.
-3. **structural-integrity-protocol.md**: Read the Phase Gate and "Traffic Cop" requirements.
-4. **ai-governance-framework.md**: Refresh the compliance obligations for your domain.
-5. **orchestration/tasks.md**: Check the current Sprint. **IF THE PREVIOUS PHASE GATE IS NOT "APPROVED" BY THE PM/PO, YOU MUST STOP AND ASK FOR CLEARANCE.**
+2. **orchestration/system_spec.md**: Read the specific section of the Spec that your SOUL file depends on. Do not hallucinate assumptions or execute without this context.
+3. **CODEX.md**: [THIS FILE] Verify the team structure and your specific mandate.
+4. **structural-integrity-protocol.md**: Read the Phase Gate and "Traffic Cop" requirements.
+5. **ai-governance-framework.md**: Refresh the compliance obligations for your domain.
+6. **orchestration/tasks.md**: Check the current Sprint. **IF THE PREVIOUS PHASE GATE IS NOT "APPROVED" BY THE PM/PO, YOU MUST STOP AND ASK FOR CLEARANCE.**
+
+---
 
 ---
 
@@ -95,6 +98,6 @@ Every agent follows the **Annealing Loop** for every task. Passivity is failure.
 ---
 
 **Template Version**: 3.0 (The Integrity Revision)
-**Last Updated**: 2026-02-16
+**Last Updated**: 2026-03-02
 **Maintained By**: All agents contribute improvements
 **Review Cadence**: Continuous improvement as patterns emerge
